@@ -22,3 +22,26 @@ class Solution {
         return res;
     }
 }
+
+
+// 思考：拆成两个 for loop 从 18% 提速到 83%？
+class Solution {
+    public int[] nextGreaterElements(int[] nums) {
+        int[] res = new int[nums.length];
+        Stack<Integer> stack = new Stack<>();
+        Arrays.fill(res, -1);
+        for(int i = 0; i < nums.length; i++) { 
+            while(!stack.isEmpty() && nums[i] > nums[stack.peek()]) {
+                res[stack.pop()] = nums[i];
+            }
+            stack.push(i);
+        }
+        for(int i = 0; i < nums.length; i++) {
+            while(!stack.isEmpty() && nums[i] > nums[stack.peek()]) {
+                res[stack.pop()] = nums[i];
+            }
+        }
+        
+        return res;
+    }
+}
